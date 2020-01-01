@@ -8,11 +8,21 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    erb :welcome
+    erb :index
   end
 
   get "/signup" do
     erb :signup
+  end
+
+  post "/signup" do
+    user = User.new(username: params[:username], password: params[:password])
+
+    if user.save
+      redirect "/"
+    else
+      puts "Fail"
+    end
   end
 
 end
